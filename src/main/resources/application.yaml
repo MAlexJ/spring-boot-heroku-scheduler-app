@@ -1,0 +1,6 @@
+server:
+  port: ${SERVER_PORT:5000}
+spring:
+  jackson:
+    serialization:
+      indent_output: true
