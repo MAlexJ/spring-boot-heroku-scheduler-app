@@ -2,6 +2,7 @@
 <html lang="en" ng-app="app">
 
 <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Scheduler</title>
@@ -35,7 +36,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0" style="margin-left: 4px;">
-                            <button class="btn btn-primary" type="button" style="border-radius: -20px;">ON</button>
+                            <button class="btn btn-primary" type="button"
+                                    ng-click="handleTask1()"
+                                    ng-style="colorTask1"
+                                    style="border-radius: -20px;">{{ labelTaskName1 }}
+                            </button>
                             <label class="form-label" style="margin-left: 14px;">Task 1</label></h5>
                     </div>
                     <div class="card-body">
@@ -43,13 +48,7 @@
                             dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
                             metus.</p>
                         <ul class="list-group">
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 2</span></li>
-                            <li class="list-group-item"><span>List Group Item 3</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
+                            <li class="list-group-item" ng-repeat="arr in taskArray" ><span>{{ arr }}</span></li>
                         </ul>
                     </div>
                 </div>
