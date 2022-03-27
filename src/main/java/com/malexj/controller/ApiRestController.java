@@ -92,15 +92,6 @@ public class ApiRestController {
                 .orElse(emptySseEmitter());
     }
 
-    private String generateCompositeKey(String id, String action) {
-        return id.concat(":").concat(action);
-    }
-
-    private String extractTaskName(String idKey) {
-        return idKey.substring(idKey.indexOf(':') + 1);
-    }
-
-
     @GetMapping("/run")
     public ResponseEntity<ResponseDto> runTask(@RequestParam(required = false) String task) {
         if (Objects.nonNull(task)) {
@@ -141,6 +132,14 @@ public class ApiRestController {
         return ResponseEntity //
                 .status(HttpStatus.BAD_REQUEST) //
                 .body(ErrorDto.builder().errorMessage(ex.getMessage()).build());
+    }
+
+    private String generateCompositeKey(String id, String action) {
+        return id.concat(":").concat(action);
+    }
+
+    private String extractTaskName(String idKey) {
+        return idKey.substring(idKey.indexOf(':') + 1);
     }
 
     private SseEmitter emptySseEmitter() throws IOException {
