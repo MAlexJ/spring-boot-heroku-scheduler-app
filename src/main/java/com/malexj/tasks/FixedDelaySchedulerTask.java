@@ -13,13 +13,13 @@ import java.util.UUID;
 @Log
 @Component
 @AllArgsConstructor
-public class FixedRateSchedulerTask {
+public class FixedDelaySchedulerTask {
 
     private final ApplicationEventPublisher publisher;
 
-    @Scheduled(fixedRate = 3000L)
+    @Scheduled(fixedDelay = 3000L)
     public void task() {
-        log.info("Execute " + getClass().getSimpleName() + "' scheduler, date - " + new Date());
+        log.info("Run - '" + getClass().getSimpleName() + "', date - " + new Date());
         publisher.publishEvent(buildEvent());
     }
 
@@ -28,7 +28,7 @@ public class FixedRateSchedulerTask {
                 .id(UUID.randomUUID().toString()) //
                 .taskName(getClass().getSimpleName()) //
                 .date(new Date()) //
-                .message("INFO_MSG + FixedRateSchedulerTask") //
+                .message("New message : INFO_MSG") //
                 .build();
     }
 
