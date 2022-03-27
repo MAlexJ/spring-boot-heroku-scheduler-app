@@ -17,7 +17,7 @@ public class FixedRateSchedulerTask {
 
     private final ApplicationEventPublisher publisher;
 
-    @Scheduled(fixedRate = 3000L)
+    @Scheduled(fixedRate = 5000L)
     public void task() {
         log.info("Execute " + getClass().getSimpleName() + "' scheduler, date - " + new Date());
         publisher.publishEvent(buildEvent());

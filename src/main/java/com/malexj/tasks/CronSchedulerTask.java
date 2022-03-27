@@ -17,7 +17,7 @@ public class CronSchedulerTask {
 
     private final ApplicationEventPublisher publisher;
 
-    @Scheduled( cron = "*/2 * * * * *")
+    @Scheduled( cron = "*/5 * * * * *")
     public void task() {
         log.info("Run - '" + getClass().getSimpleName() + "', date - " + new Date());
         publisher.publishEvent(buildEvent());

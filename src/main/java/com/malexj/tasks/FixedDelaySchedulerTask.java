@@ -17,7 +17,7 @@ public class FixedDelaySchedulerTask {
 
     private final ApplicationEventPublisher publisher;
 
-    @Scheduled(fixedDelay = 3000L)
+    @Scheduled(fixedDelay = 7000L)
     public void task() {
         log.info("Run - '" + getClass().getSimpleName() + "', date - " + new Date());
         publisher.publishEvent(buildEvent());
