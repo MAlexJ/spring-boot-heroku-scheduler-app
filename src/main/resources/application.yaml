@@ -4,3 +4,5 @@ spring:
   jackson:
     serialization:
       indent_output: true
+  application:
+    name: "heroku-scheduler-app"
