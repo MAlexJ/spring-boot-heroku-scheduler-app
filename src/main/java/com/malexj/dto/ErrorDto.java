@@ -1,4 +1,4 @@
-package com.malexj.model;
+package com.malexj.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class ErrorDto {
-    public String errorMessage;
+    private String errorMessage;
 }

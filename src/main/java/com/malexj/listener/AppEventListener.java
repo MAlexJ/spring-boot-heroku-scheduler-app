@@ -10,12 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppEventListener {
 
-//    @Async
-//    @EventListener
-//    public void handle(ModelEvent event) {
-//        log.info(">>>>>>>>>>>>>>>>>>>>");
-//        log.info(event.toString());
-//        log.info(">>>>>>>>>>>>>>>>>>>>");
-//    }
+    @Async
+    @EventListener
+    public void handle(ModelEvent event) {
+        log.info("AppEventListener : " + event.toString());
+    }
 
 }

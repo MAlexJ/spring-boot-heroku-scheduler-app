@@ -32,78 +32,27 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="col-md-6" style="margin-top: 40px;">
+            <div class="col-md-12" style="margin-top: 40px; height: 500px;">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0" style="margin-left: 4px;">
-                            <button class="btn btn-primary" type="button"
-                                    ng-click="handleTask1()"
-                                    ng-style="colorTask1"
-                                    style="border-radius: -20px;">{{ labelTaskName1 }}
+                            <button class="btn btn-primary"
+                                    type="button"
+                                    style="border-radius: -20px;">ON/OFF
                             </button>
-                            <label class="form-label" style="margin-left: 14px;">Task 1</label></h5>
+                            <label class="form-label" style="margin-left: 14px;">Real time monitor</label>
+                        </h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio,
-                            dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                            metus.</p>
+                        <p class="card-text">Active scheduler task</p>
                         <ul class="list-group">
-                            <li class="list-group-item" ng-repeat="arr in taskArray" ><span>{{ arr }}</span></li>
+                            <li class="list-group-item" ng-repeat="task in taskArray track by $index">
+                                <span>{{ task.lastEventId }}</span> : {{ task.data }}
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" style="margin-top: 40px;">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0" style="margin-left: 4px;">
-                            <button class="btn btn-primary" type="button" style="border-radius: -20px;">ON</button>
-                            <label class="form-label" style="margin-left: 14px;">Task 2</label></h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio,
-                            dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                            metus.</p>
-                        <ul class="list-group">
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 2</span></li>
-                            <li class="list-group-item"><span>List Group Item 3</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container" style="margin-top: 40px;">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0" style="margin-left: 4px;">
-                            <button class="btn btn-primary" type="button" style="border-radius: -20px;">ON</button>
-                            <label class="form-label" style="margin-left: 14px;">Task 3</label></h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio,
-                            dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-                            metus.</p>
-                        <ul class="list-group">
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 2</span></li>
-                            <li class="list-group-item"><span>List Group Item 3</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                            <li class="list-group-item"><span>List Group Item 1</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6"></div>
         </div>
     </div>
 </header>
