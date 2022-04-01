@@ -10,3 +10,9 @@
 
 * [Server Sent Events](https://learn.javascript.ru/server-sent-events)
 * 
+
+
+### ENV Variables
+
+1. SCHEDULER_ENABLED - activate scheduling, by default - true
+2. ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost
