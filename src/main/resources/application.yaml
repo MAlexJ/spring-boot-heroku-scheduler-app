@@ -6,3 +6,8 @@ spring:
       indent_output: true
   application:
     name: "heroku-scheduler-app"
+  zipkin:
+    baseUrl: ${ZIPKIN_PORT:http://localhost}
+
+scheduler:
+  enabled: ${SCHEDULER_ENABLED:true}
