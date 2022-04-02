@@ -7,7 +7,11 @@ spring:
   application:
     name: "heroku-scheduler-app"
   zipkin:
-    baseUrl: ${ZIPKIN_PORT:http://localhost}
+    baseUrl: ${ZIPKIN_PORT:http://127.0.0.1:9411}
+  data:
+    mongodb:
+      database: ${MONGODB_DATABASE}
+      uri: ${MONGODB_URI}
 
 scheduler:
   enabled: ${SCHEDULER_ENABLED:true}
