@@ -117,17 +117,20 @@ public class EventController {
 
     @SneakyThrows
     private SseEmitter handShakeEmitter() {
+        SseEmitter sseEmitter = new SseEmitter();
+        sseEmitter.send(buildHandShakeEvent());
+        sseEmitter.complete();
+        return sseEmitter;
+    }
+
+    private SseEmitter.SseEventBuilder buildHandShakeEvent() {
         String id = UUID.randomUUID().toString();
         List<ModelEvent> modelEvents = new ArrayList<>(evictingSseEventQueue);
-        SseEmitter.SseEventBuilder sseEventBuilder = SseEmitter.event() //
+        return SseEmitter.event() //
                 .id(id) //
                 .data(modelEvents) //
                 .name(HANDSHAKE_EVENT.getEmitterEventName()) //
                 .comment("Comment from empty emitter") //
                 .reconnectTime(Long.MIN_VALUE);
-        SseEmitter sseEmitter = new SseEmitter();
-        sseEmitter.send(sseEventBuilder);
-        sseEmitter.complete();
-        return sseEmitter;
     }
 }
