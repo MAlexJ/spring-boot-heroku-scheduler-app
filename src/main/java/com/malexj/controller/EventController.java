@@ -76,7 +76,6 @@ public class EventController {
     @SneakyThrows
     @GetMapping("/subscribe/{eventId}/{event}")
     public SseEmitter subscribeToEmitterByIdAndEvent(@PathVariable String eventId, @PathVariable String event) {
-        log.info(">>>>> EmitterID " + eventId);
         SseEmitterWrapper emitterWrapper = buildWrapper(eventId, event);
         return Optional.ofNullable(emitterMap.putIfAbsent(eventId, emitterWrapper)) //
                 .map(SseEmitterWrapper::getEmitter) //

@@ -1,7 +1,7 @@
 'use strict';
 
 app.component('monitor', {
-    controller: function (RestAPI, $scope, $timeout, $interval, $location) {
+    controller: function (RestAPI, $scope, $transitions, $interval, $location) {
 
         let tick = function () {
             $scope.clock = Date.now();
@@ -23,53 +23,56 @@ app.component('monitor', {
         let handshake_event_type = "handshake_event";
 
         // event source
-        let eventSource = new EventSource(baseUrl + `/subscribe/${id}/${event_type}`);
+        let eventSource;
+        if (!eventSource) {
+            eventSource = new EventSource(baseUrl + `/subscribe/${id}/${event_type}`);
+        }
+
+        $transitions.onSuccess({from: 'monitor'}, function (transition) {
+            console.log("Left 'monitor' state");
+            if (eventSource) {
+                eventSource.close();
+            }
+        });
+
+        $transitions.onError({from: 'monitor'}, function (transition) {
+            console.error("Error while leaving 'home' state: " + transition.error());
+        });
 
         eventSource.onopen = (event) => {
             console.warn("onopen")
             console.warn(event)
-            console.warn("")
         }
 
         eventSource.onmessage = (event) => {
             console.log("onmessage")
             console.log(event)
-            console.log("")
         };
 
         eventSource.onerror = (event) => {
             console.error("onerror");
             console.error(event)
-            console.error("")
         };
 
         eventSource.addEventListener(event_type, event => {
-            console.log(`>>> ${event_type} type`)
-            console.log("id: " + event.lastEventId)
-            console.log("data: " + event.data)
+            console.log("id: " + event.lastEventId + `${event_type} type` + "data: " + event.data)
             $scope.$apply(function () {
                 if ($scope.taskArray.length === 7) {
                     $scope.taskArray.shift();
                 }
                 $scope.taskArray.push(event);
             });
-            console.log("")
         });
 
         eventSource.addEventListener(handshake_event_type, (event) => {
-            console.log(handshake_event_type);
-            console.log("lastEventId: " + event.lastEventId)
-
-            console.log("data: " + event.data)
-            console.log("JSON data: " + JSON.parse(event.data))
-
+            console.log(handshake_event_type + ", id: " + event.lastEventId + `${event_type} type`)
+            console.log(handshake_event_type + ", data: " + JSON.parse(event.data))
             $scope.$apply(function () {
                 JSON.parse(event.data).forEach(message => {
                     let dto = mapEventToMessage(message);
                     $scope.taskArray.push(dto);
                 })
             });
-            console.log("")
         });
 
         function mapEventToMessage(message) {

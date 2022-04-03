@@ -1,7 +1,15 @@
 'use strict';
 
 app.component('logs', {
-    controller: function (RestAPI, $scope) {
+    controller: function (RestAPI, $transitions, $scope) {
+
+        RestAPI.get("/logs")
+            .then(function (response) {
+                $scope.logs = response.data;
+            }, function (reason) {
+                $scope.error = reason.data
+                alert(reason.data)
+            });
 
     }, template: `
 <div class="container">
@@ -10,35 +18,25 @@ app.component('logs', {
          <div class="col-lg-12"></div>
          <div class="col-lg-12">
             <table class="table">
-  <thead class="table-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+               <thead class="table-dark">
+                  <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Event</th>
+                     <th scope="col">Message</th>
+                     <th scope="col">Scheduler</th>
+                     <th scope="col">Date</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="log in logs.modelEventList" >
+                     <th scope="row">{{log.id}}</th>
+                     <td>{{log.event}}</td>
+                     <td>{{log.message}}</td>
+                     <td>{{log.scheduler}}</td>
+                     <td>{{log.created}}</td>
+                  </tr>
+               </tbody>
+            </table>
          </div>
          <div class="col-lg-12">
             <nav aria-label="Page navigation example">

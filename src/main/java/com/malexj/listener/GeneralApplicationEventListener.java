@@ -2,6 +2,7 @@ package com.malexj.listener;
 
 import com.malexj.entity.ModelEventEntity;
 import com.malexj.event.ModelEvent;
+import com.malexj.mapper.ModelEventEntityMapper;
 import com.malexj.repository.ModelEventRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -16,19 +17,15 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class GeneralApplicationEventListener {
 
-    private final ModelEventRepository modelEventRepository;
+    private final ModelEventRepository repository;
+    private final ModelEventEntityMapper mapper;
 
     @Async
     @EventListener
     public void handleAndSaveModelEventToDb(ModelEvent event) {
-        log.info("AppEventListener : " + event.toString());
-        ModelEventEntity eventEntity = new ModelEventEntity();
-        eventEntity.setId(event.getId());
-        eventEntity.setEvent(event.getEvent());
-        eventEntity.setMessage(event.getMessage());
-        eventEntity.setScheduler(event.getScheduler());
+        ModelEventEntity eventEntity = mapper.eventToModelEntity(event);
         eventEntity.setCreated(LocalDateTime.now());
-        modelEventRepository.save(eventEntity);
+        repository.save(eventEntity);
     }
 
 }

@@ -22,34 +22,18 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
     implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
     implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
-
-    // https://mvnrepository.com/artifact/org.webjars/bootstrap
     implementation group: 'org.webjars', name: 'bootstrap', version: '5.1.3'
-
-    // https://mvnrepository.com/artifact/org.webjars/angularjs
     implementation group: 'org.webjars', name: 'angularjs', version: '1.8.2'
-
-    // https://mvnrepository.com/artifact/org.webjars.bower/angular-cookies
     implementation group: 'org.webjars.bower', name: 'angular-cookies', version: '1.8.2'
-
-    // https://mvnrepository.com/artifact/org.webjars.bower/angular-sanitize
     implementation group: 'org.webjars.bower', name: 'angular-sanitize', version: '1.8.2'
-
-    // https://mvnrepository.com/artifact/org.webjars/angular-ui-router
     implementation group: 'org.webjars', name: 'angular-ui-router', version: '1.0.20'
-
-    // https://mvnrepository.com/artifact/org.webjars.npm/popper.js
     implementation group: 'org.webjars.npm', name: 'popper.js', version: '1.16.1'
-
-    // https://mvnrepository.com/artifact/org.webjars.bower/jquery
     implementation group: 'org.webjars.bower', name: 'jquery', version: '3.6.0'
-
-// https://mvnrepository.com/artifact/org.webjars.npm/ionicons
     implementation group: 'org.webjars.npm', name: 'ionicons', version: '2.0.1'
-
-
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
