@@ -91,50 +91,52 @@ app.component('monitor', {
         }
     }, template: `
 <div class="container">
-<div class="row" style="padding: 40px;">
-   <div class="col-12">
-      <div class="card text-center">
-         <div class="card-header">
-            <svg class="blink_1_second bd-placeholder-img rounded me-2" width="10" height="10" 
-               xmlns="http://www.w3.org/2000/svg" 
-               aria-hidden="true" 
-               preserveAspectRatio="xMidYMid slice" focusable="false">
-               <rect width="100%" height="100%" fill="cornflowerblue"></rect>
-            </svg>
-            Real time monitor 
-            <br>
-            {{ clock | date:'medium'}}
-         </div>
-         <div class="card-body">
-            <h5 class="card-title">Scheduler task</h5>
-            <div class="table-responsive">
-               <table class="table table-sm">
-                  <thead>
-                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Id</th>
-                        <th scope="col">Message</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Time</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr ng-repeat="item in taskArray track by $index">
-                        <th scope="row">{{item.lastEventId | convertTohHshCode}}</th>
-                        <td>{{item.lastEventId}}</td>
-                        <td>{{item.data}}</td>
-                        <td>{{item.type}}</td>
-                        <td>{{currentDate | date:'HH:mm:ss'}}</td>
-                     </tr>
-                  </tbody>
-               </table>
+   <div class="row" style="padding: 40px;">
+      <div class="col-12">
+         <div class="card text-center">
+            <div class="card-header">
+               <svg class="blink_1_second bd-placeholder-img rounded me-2" width="10" height="10" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  aria-hidden="true" 
+                  preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <rect width="100%" height="100%" fill="cornflowerblue"></rect>
+               </svg>
+               Real time monitor 
+               <br>
+               {{ clock | date:'medium'}}
             </div>
-         </div>
-         <div class="card-footer text-muted">
-            <div class="blink_3_second">Loading data 
-               <span class="blink_1_second">.</span>
-               <span class="blink_1_second">.</span>
-               <span class="blink_1_second">.</span>
+            <div class="card-body">
+               <h5 class="card-title">Scheduler task</h5>
+               <div class="table-responsive">
+                  <table class="table table-sm">
+                     <thead>
+                        <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Id</th>
+                           <th scope="col">Message</th>
+                           <th scope="col">Type</th>
+                           <th scope="col">Time</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr ng-repeat="item in taskArray track by $index">
+                           <th scope="row">{{item.lastEventId | convertTohHshCode}}</th>
+                           <td>{{item.lastEventId}}</td>
+                           <td>{{item.data}}</td>
+                           <td>{{item.type}}</td>
+                           <td>{{currentDate | date:'HH:mm:ss'}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <div class="blink_3_second">Loading data 
+                     <span class="blink_1_second">.</span>
+                     <span class="blink_1_second">.</span>
+                     <span class="blink_1_second">.</span>
+                  </div>
+               </div>
+            </div>
+            <div class="card-footer text-muted">
+               <p></p>
             </div>
          </div>
       </div>
