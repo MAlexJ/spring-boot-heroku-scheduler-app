@@ -9,6 +9,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Log
 @Component
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class GeneralApplicationEventListener {
         eventEntity.setEvent(event.getEvent());
         eventEntity.setMessage(event.getMessage());
         eventEntity.setScheduler(event.getScheduler());
+        eventEntity.setCreated(LocalDateTime.now());
         modelEventRepository.save(eventEntity);
     }
 

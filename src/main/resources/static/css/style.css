@@ -82,3 +82,17 @@ h1 {
     background-color: #101115;
     border-color: #101115;
 }
+
+.blink_1_second{
+    animation: blinker 1s linear infinite;
+}
+
+.blink_3_second{
+    animation: blinker 3s linear infinite;
+}
+
+@keyframes blinker {
+    40% {
+        opacity: 0;
+    }
+}

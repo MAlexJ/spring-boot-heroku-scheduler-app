@@ -1,5 +1,6 @@
 package com.malexj.tasks;
 
+import com.google.common.io.BaseEncoding;
 import com.malexj.event.Event;
 import com.malexj.event.ModelEvent;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class SseEmitterScheduler {
 
+    private final Random random = new Random(); // or SecureRandom
     private final ApplicationEventPublisher publisher;
 
     @Scheduled(cron = "*/5 * * * * *")
@@ -29,8 +31,14 @@ public class SseEmitterScheduler {
         return ModelEvent.builder() //
                 .id(UUID.randomUUID().toString()) //
                 .event(Event.SSE_EVENT) //
-                .message("Message CronSchedulerTask, value: " + new Random().nextInt(Integer.MAX_VALUE)) //
+                .message("Message CronSchedulerTask, value: " + random.nextInt(Integer.MAX_VALUE) + ", " + generate()) //
                 .scheduler(getClass().getSimpleName()) //
                 .build();
+    }
+
+    String generate() {
+        final byte[] buffer = new byte[5];
+        random.nextBytes(buffer);
+        return BaseEncoding.base64Url().omitPadding().encode(buffer); // or base32()
     }
 }
