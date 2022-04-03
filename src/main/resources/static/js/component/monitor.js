@@ -3,7 +3,7 @@
 app.component('monitor', {
     controller: function (RestAPI, $scope, $timeout, $interval, $location) {
 
-        let tick = function() {
+        let tick = function () {
             $scope.clock = Date.now();
         }
         tick();
