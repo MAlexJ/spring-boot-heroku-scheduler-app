@@ -20,7 +20,7 @@ public class GeneralApplicationEventListener {
 
     @Async
     @EventListener
-    public void handleAndSaveModelEvent(ModelEvent event) {
+    public void handleAndSaveModelEventToDb(ModelEvent event) {
         log.info("AppEventListener : " + event.toString());
         ModelEventEntity eventEntity = new ModelEventEntity();
         eventEntity.setId(event.getId());

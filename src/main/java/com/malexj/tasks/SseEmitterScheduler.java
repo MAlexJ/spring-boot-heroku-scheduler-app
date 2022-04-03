@@ -22,7 +22,7 @@ public class SseEmitterScheduler {
     private final ApplicationEventPublisher publisher;
 
     @Scheduled(cron = "*/5 * * * * *")
-    public void task() {
+    public void executionScheduledTask() {
         log.info("SseEmitterScheduler : " + getClass().getSimpleName() + "', date - " + new Date());
         publisher.publishEvent(buildEvent());
     }

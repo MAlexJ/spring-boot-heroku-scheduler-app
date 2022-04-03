@@ -47,7 +47,7 @@ public class EventController {
 
     @Async
     @EventListener
-    public void handle(ModelEvent event) {
+    public void handleAndOfferEventToBuffer(ModelEvent event) {
         Event eventType = event.getEvent();
 
         // add event to buffer
@@ -75,7 +75,7 @@ public class EventController {
 
     @SneakyThrows
     @GetMapping("/subscribe/{eventId}/{event}")
-    public SseEmitter subscribe(@PathVariable String eventId, @PathVariable String event) {
+    public SseEmitter subscribeToEmitterByIdAndEvent(@PathVariable String eventId, @PathVariable String event) {
         log.info(">>>>> EmitterID " + eventId);
         SseEmitterWrapper emitterWrapper = buildWrapper(eventId, event);
         return Optional.ofNullable(emitterMap.putIfAbsent(eventId, emitterWrapper)) //
