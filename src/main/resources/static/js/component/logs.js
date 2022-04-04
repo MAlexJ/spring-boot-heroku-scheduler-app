@@ -3,11 +3,37 @@
 app.component('logs', {
     controller: function (RestAPI, $transitions, $scope) {
 
-        // number of pagination buttons
-        $scope.numberOfPaginationBtn = 1;
+        // total number of events in logs
+        $scope.totalEvents = -1;
 
         // UI pagination start from 0 position
-        $scope.activePaginationBtnNumber = 0;
+        $scope.activePaginationPosition = 0;
+
+        // number of pagination buttons by default
+        $scope.defaultNumberOfPagination = 3;
+
+        $scope.pagination = [];
+
+        function initDefaultPagination() {
+            let input = []
+
+            if ($scope.totalEvents === 0) {
+                input.push(0)
+                return input;
+            }
+
+            if ($scope.totalEvents <= $scope.defaultNumberOfPagination) {
+                for (let i = 0; i < $scope.totalEvents; i++) {
+                    input.push(i)
+                }
+                return input;
+            }
+
+            for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
+                input.push(i)
+            }
+            return input;
+        }
 
         // REST api call
         RestAPI.get("/logs")
@@ -17,7 +43,8 @@ app.component('logs', {
                 if (responseData) {
                     let responseData = response.data;
                     $scope.logs = responseData;
-                    $scope.numberOfPaginationBtn = responseData.totalPages;
+                    $scope.totalEvents = responseData.totalPages - 1;
+                    $scope.pagination = initDefaultPagination();
                 }
             }, function (reason) {
                 $scope.error = reason.data
@@ -26,6 +53,14 @@ app.component('logs', {
 
         $scope.paginationRange = function () {
             let input = []
+            // total events are less than the default number of pagination
+            if ($scope.totalEvents <= $scope.defaultNumberOfPagination) {
+                for (let i = 0; i <= $scope.totalEvents; i++) {
+                    input.push(i)
+                }
+                return input;
+            }
+
             for (let i = 1; i <= $scope.numberOfPaginationBtn; i++) {
                 input.push(i)
             }
@@ -34,22 +69,52 @@ app.component('logs', {
 
         $scope.getLogData = function (pageNumber) {
             // Pagination button position starts from 0
-            $scope.activePaginationBtnNumber = pageNumber - 1;
+            $scope.activePaginationPosition = pageNumber;
 
             // REST api call
-            RestAPI.get("/logs?page=" + $scope.activePaginationBtnNumber)
+            RestAPI.get("/logs?page=" + pageNumber)
                 .then(function (response) {
                     let responseData = response.data;
                     $scope.logs = responseData;
-                    $scope.numberOfPaginationBtn = responseData.totalPages;
+                    $scope.totalEvents = responseData.totalPages - 1;
+                    $scope.pagination = calculatePagination(pageNumber);
                 }, function (reason) {
                     $scope.error = reason.data
                     alert(reason.data)
                 });
         }
 
+        function calculatePagination(page) {
+            let tempArr = [];
+            let temp = page;
+
+            if (page === 0) {
+                for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
+                    tempArr[i] = temp++;
+                }
+                return tempArr;
+            }
+
+            if (page === $scope.totalEvents) {
+                for (let i = $scope.defaultNumberOfPagination; i > 0; i--) {
+                    if(temp < 0) {
+                        break;
+                    }
+                    tempArr[i - 1] = temp--;
+                }
+                return tempArr;
+            }
+
+            temp = page - 1;
+            for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
+                tempArr[i] = temp++;
+            }
+
+            return tempArr;
+        }
+
         $scope.calculateActivePage = function (pageNumber) {
-            return pageNumber - 1;
+            return pageNumber;
         }
 
     }, template: `
@@ -86,13 +151,27 @@ app.component('logs', {
                      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                   </li>
                   <li class="page-item" 
-                     ng-repeat="pageNumber in paginationRange()" 
+                     ng-repeat="pageNumber in pagination" 
                      style="cursor: pointer"
-                     ng-class="{active : activePaginationBtnNumber === calculateActivePage(pageNumber)}">
-                     <a id="page-number-id-{{ pageNumber - 1}}"
+                     ng-class="{ active : pageNumber == activePaginationPosition}">
+                     <a id="page-number-id-{{ pageNumber }}"
                         ng-click="getLogData(pageNumber)"
                         class="page-link">
                      {{ pageNumber }}
+                     </a>
+                  </li>
+                  <li class="page-item" style="cursor: default">
+                     <a class="page-link">
+                     ... 
+                     </a>
+                  </li>
+                  <li class="page-item"                  
+                     style="cursor: pointer"
+                     ng-class="{ active : totalEvents == activePaginationPosition}">
+                     <a id="page-number-id-{{ totalEvents }}"
+                        ng-click="getLogData(totalEvents)"
+                        class="page-link">
+                     {{ totalEvents }}
                      </a>
                   </li>
                   <li class="page-item">
