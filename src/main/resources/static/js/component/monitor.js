@@ -29,7 +29,7 @@ app.component('monitor', {
         }
 
         $transitions.onSuccess({from: 'monitor'}, function (transition) {
-            console.log("Left 'monitor' state");
+            console.log("Left 'monitor' state and close 'eventSource' connection");
             if (eventSource) {
                 eventSource.close();
             }

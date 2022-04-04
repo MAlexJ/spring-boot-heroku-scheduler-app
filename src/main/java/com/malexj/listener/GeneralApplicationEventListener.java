@@ -23,7 +23,7 @@ public class GeneralApplicationEventListener {
     @Async
     @EventListener
     public void handleAndSaveModelEventToDb(ModelEvent event) {
-        ModelEventEntity eventEntity = mapper.eventToModelEntity(event);
+        ModelEventEntity eventEntity = mapper.modelEventToModelEventEntity(event);
         eventEntity.setCreated(LocalDateTime.now());
         repository.save(eventEntity);
     }
