@@ -4,52 +4,97 @@ app.component('logs', {
     controller: function (RestAPI, $transitions, $scope) {
 
         // total number of events in logs
-        $scope.totalEvents = -1;
+        $scope.totalEvents = 0;
 
         // UI pagination start from 0 position
         $scope.activePaginationPosition = 0;
 
         // number of pagination buttons by default
-        $scope.defaultNumberOfPagination = 3;
+        $scope.defaultNumberOfPagination = 7;
 
         $scope.pagination = [];
 
+        // REST api call
+        restApiGetLogs()
+
+        $scope.getLogData = function (pageNumber) {
+            // Pagination button position starts from 0
+            $scope.activePaginationPosition = pageNumber;
+            // REST api call
+            restApiGetLogs(pageNumber);
+        }
+
+        function restApiGetLogs(pageNumber) {
+            let path = "/logs";
+            if (pageNumber) {
+                path = path + "?page=" + pageNumber;
+            }
+            RestAPI.get(path)
+                .then(function (response) {
+                    let responseData = response.data;
+                    $scope.logs = responseData;
+                    if (responseData) {
+                        let responseData = response.data;
+                        $scope.logs = responseData;
+                        $scope.totalEvents = responseData.totalPages - 1;
+                        if (pageNumber) {
+                            $scope.pagination = calculatePagination(pageNumber);
+                        } else {
+                            $scope.pagination = initDefaultPagination();
+                        }
+                    }
+                }, function (reason) {
+                    $scope.error = reason.data
+                    alert(reason.data)
+                });
+        }
+
+        // init state of pagination
         function initDefaultPagination() {
             let input = []
-
             if ($scope.totalEvents === 0) {
-                input.push(0)
                 return input;
             }
-
             if ($scope.totalEvents <= $scope.defaultNumberOfPagination) {
                 for (let i = 0; i < $scope.totalEvents; i++) {
                     input.push(i)
                 }
                 return input;
             }
-
             for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
                 input.push(i)
             }
             return input;
         }
 
-        // REST api call
-        RestAPI.get("/logs")
-            .then(function (response) {
-                let responseData = response.data;
-                $scope.logs = responseData;
-                if (responseData) {
-                    let responseData = response.data;
-                    $scope.logs = responseData;
-                    $scope.totalEvents = responseData.totalPages - 1;
-                    $scope.pagination = initDefaultPagination();
+        function calculatePagination(page) {
+            let tempArr = [];
+            let temp = page;
+
+            if (page === 0) {
+                for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
+                    tempArr[i] = temp++;
                 }
-            }, function (reason) {
-                $scope.error = reason.data
-                alert(reason.data)
-            });
+                return tempArr;
+            }
+
+            if (page === $scope.totalEvents) {
+                for (let i = $scope.defaultNumberOfPagination; i > 0; i--) {
+                    if (temp < 0) {
+                        break;
+                    }
+                    tempArr[i - 1] = temp--;
+                }
+                return tempArr;
+            }
+
+            temp = page - 1;
+            for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
+                tempArr[i] = temp++;
+            }
+
+            return tempArr;
+        }
 
         $scope.paginationRange = function () {
             let input = []
@@ -67,52 +112,6 @@ app.component('logs', {
             return input;
         }
 
-        $scope.getLogData = function (pageNumber) {
-            // Pagination button position starts from 0
-            $scope.activePaginationPosition = pageNumber;
-
-            // REST api call
-            RestAPI.get("/logs?page=" + pageNumber)
-                .then(function (response) {
-                    let responseData = response.data;
-                    $scope.logs = responseData;
-                    $scope.totalEvents = responseData.totalPages - 1;
-                    $scope.pagination = calculatePagination(pageNumber);
-                }, function (reason) {
-                    $scope.error = reason.data
-                    alert(reason.data)
-                });
-        }
-
-        function calculatePagination(page) {
-            let tempArr = [];
-            let temp = page;
-
-            if (page === 0) {
-                for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
-                    tempArr[i] = temp++;
-                }
-                return tempArr;
-            }
-
-            if (page === $scope.totalEvents) {
-                for (let i = $scope.defaultNumberOfPagination; i > 0; i--) {
-                    if(temp < 0) {
-                        break;
-                    }
-                    tempArr[i - 1] = temp--;
-                }
-                return tempArr;
-            }
-
-            temp = page - 1;
-            for (let i = 0; i < $scope.defaultNumberOfPagination; i++) {
-                tempArr[i] = temp++;
-            }
-
-            return tempArr;
-        }
-
         $scope.calculateActivePage = function (pageNumber) {
             return pageNumber;
         }
@@ -120,7 +119,17 @@ app.component('logs', {
     }, template: `
 <div class="container">
    <div class="row justify-content-md-center" style="display: block">
-      <div class="row" style="padding: 40px;">
+      <div class="row" style="padding-top: 40px;padding-bottom: 20px;margin-right: 0px;padding-right: 0px;">
+         <ul class="nav nav-tabs" style="cursor: pointer">
+            <li class="nav-item">
+               <a class="nav-link active" aria-current="page" style="color: black;">Events</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" style="color: black;">Errors</a>
+            </li>
+         </ul>
+      </div>
+      <div class="row" style="padding-bottom: 40px;margin-right: 0px;padding-right: 0px;">
          <div class="col-lg-12"></div>
          <div class="col-lg-12 table-responsive">
             <table class="table">
@@ -144,11 +153,11 @@ app.component('logs', {
                </tbody>
             </table>
          </div>
-         <div class="col-lg-12" style="padding-top: 10px">
+         <div class="col-lg-12" style="padding-bottom: 40px;position: fixed;right: 0;left: 0;bottom: 0;">
             <nav aria-label="Page navigation example">
                <ul class="pagination justify-content-center">
                   <li class="page-item disabled">
-                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> < </a>
                   </li>
                   <li class="page-item" 
                      ng-repeat="pageNumber in pagination" 
@@ -160,22 +169,8 @@ app.component('logs', {
                      {{ pageNumber }}
                      </a>
                   </li>
-                  <li class="page-item" style="cursor: default">
-                     <a class="page-link">
-                     ... 
-                     </a>
-                  </li>
-                  <li class="page-item"                  
-                     style="cursor: pointer"
-                     ng-class="{ active : totalEvents == activePaginationPosition}">
-                     <a id="page-number-id-{{ totalEvents }}"
-                        ng-click="getLogData(totalEvents)"
-                        class="page-link">
-                     {{ totalEvents }}
-                     </a>
-                  </li>
                   <li class="page-item">
-                     <a class="page-link" href="#">Next</a>
+                     <a class="page-link" href="#"> > </a>
                   </li>
                </ul>
             </nav>

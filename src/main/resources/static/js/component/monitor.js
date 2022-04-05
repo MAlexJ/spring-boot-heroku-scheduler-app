@@ -91,7 +91,7 @@ app.component('monitor', {
         }
     }, template: `
 <div class="container">
-   <div class="row" style="padding: 40px;">
+   <div class="row" style="padding-top: 40px;padding-bottom: 40px">
       <div class="col-12">
          <div class="card text-center">
             <div class="card-header">
