@@ -30,6 +30,7 @@
     <script src="js/service/service.js"></script>
     <script src="js/filter/filter.js"></script>
     <script src="js/controller/navBarController.js"></script>
+    <script src="js/controller/footerController.js"></script>
     <script src="js/component/monitor.js"></script>
     <script src="js/component/logs.js"></script>
     <script src="js/component/settings.js"></script>
@@ -80,9 +81,10 @@
         </div>
     </ui-view>
 </main>
-<footer class="footer mt-auto py-3 bg-dark fixed-bottom">
+<footer ng-controller="footerController" class="footer mt-auto py-3 bg-dark fixed-bottom">
     <div class="container">
-        <span class="text-muted"></span>
+        <span class="text-muted">Version: {{ appInfo.version }}</span> <br>
+        <span class="text-muted">Build time: {{ appInfo.time }}</span>
     </div>
 </footer>
 </body>

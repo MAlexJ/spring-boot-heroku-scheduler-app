@@ -29,6 +29,10 @@
 
 * [Java documentation standard](https://docs.oracle.com/en/java/javase/17/docs/specs/javadoc/doc-comment-spec.html#link)
 
+#### Gradle
+
+* [Detecting build version and time at runtime](https://www.vojtechruzicka.com/spring-boot-version/)
+
 ### ENV Variables
 
 1. SCHEDULER_ENABLED - activate scheduling, by default - true

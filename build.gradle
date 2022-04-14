@@ -5,11 +5,16 @@ plugins {
 }
 
 group = 'com.malexj'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.2'
 sourceCompatibility = '18'
 
 repositories {
     mavenCentral()
+}
+
+// allow BuildProperties bean to be used to get project info: version, name, time and group
+springBoot{
+    buildInfo()
 }
 
 ext {
