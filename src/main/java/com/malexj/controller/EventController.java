@@ -6,7 +6,6 @@ import com.malexj.event.ModelEvent;
 import com.malexj.exception.SseEmitterException;
 import com.malexj.model.SseEmitterWrapper;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.java.Log;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -37,7 +36,7 @@ public class EventController {
     private Queue<ModelEvent> evictingSseEventQueue;
 
     // Max number of stored evens in buffer
-    private static final int MAX_SIZE = 7;
+    private static final int MAX_SIZE = 7; //todo >>> move to property file
 
     @PostConstruct
     public void init() {
@@ -73,7 +72,6 @@ public class EventController {
                 });
     }
 
-    @SneakyThrows
     @GetMapping("/subscribe/{eventId}/{event}")
     public SseEmitter subscribeToEmitterByIdAndEvent(@PathVariable String eventId, @PathVariable String event) {
         SseEmitterWrapper emitterWrapper = buildWrapper(eventId, event);
@@ -114,12 +112,16 @@ public class EventController {
                 .reconnectTime(Long.MIN_VALUE);
     }
 
-    @SneakyThrows
     private SseEmitter handShakeEmitter() {
-        SseEmitter sseEmitter = new SseEmitter();
-        sseEmitter.send(buildHandShakeEvent());
-        sseEmitter.complete();
-        return sseEmitter;
+        try {
+            SseEmitter sseEmitter = new SseEmitter();
+            sseEmitter.send(buildHandShakeEvent());
+            sseEmitter.complete();
+            return sseEmitter;
+        } catch (IOException e) {
+            log.severe(e.getMessage());
+            throw new SseEmitterException(e.getMessage());
+        }
     }
 
     private SseEmitter.SseEventBuilder buildHandShakeEvent() {

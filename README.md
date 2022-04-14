@@ -12,6 +12,11 @@
 * [Spring @PageableDefault](https://stackoverflow.com/questions/41486047/use-pageabledefault-with-spring-data-rest)
 * [Spring spring-data-web @PageableDefault](https://www.baeldung.com/spring-data-web-support)
 
+#### Spring Boot Actuator:
+
+* [How to Enable All Endpoints](https://www.baeldung.com/spring-boot-actuator-enable-endpoints)
+* [Web API Documentation](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/)
+
 #### Spring mapper:
 
 * [MapStruct documentation](https://mapstruct.org/documentation/stable/reference/html/)
