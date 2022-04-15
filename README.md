@@ -2,9 +2,8 @@
 
 ### ENV Variables
 
-1. SCHEDULER_ENABLED - activate scheduling, by default - true
-2. SCHEDULER_CRONE - job time to execute
-3. ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost
+1. SCHEDULER_CRONE - job time to execute
+2. ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost
 
 ##### gradle:
 

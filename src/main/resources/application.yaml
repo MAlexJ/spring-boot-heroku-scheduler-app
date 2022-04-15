@@ -5,7 +5,7 @@ spring:
     serialization:
       indent_output: true
   application:
-    name: "heroku-scheduler-app"
+    name: heroku-scheduler-app
   zipkin:
     baseUrl: ${ZIPKIN_PORT:http://127.0.0.1:9411}
   data:
@@ -15,7 +15,6 @@ spring:
 
 scheduled:
   task:
-    execute: ${SCHEDULER_ENABLED:true}
     job:
       cron: ${SCHEDULER_CRONE:*/5 * * * * *}
 
@@ -23,4 +22,4 @@ management:
   endpoints:
     web:
       exposure:
-        include=*:
+        include: '*'
