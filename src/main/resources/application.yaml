@@ -13,8 +13,11 @@ spring:
       database: ${MONGODB_DATABASE}
       uri: ${MONGODB_URI}
 
-scheduler:
-  enabled: ${SCHEDULER_ENABLED:true}
+scheduled:
+  task:
+    execute: ${SCHEDULER_ENABLED:true}
+    job:
+      cron: ${SCHEDULER_CRONE:*/5 * * * * *}
 
 management:
   endpoints:

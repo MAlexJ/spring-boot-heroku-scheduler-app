@@ -19,7 +19,7 @@ public class SseEmitterScheduler {
 
     private final ApplicationEventPublisher publisher;
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "${scheduled.task.job.cron}")
     public void executionScheduledTask() {
         publisher.publishEvent(buildEvent());
     }
@@ -28,14 +28,19 @@ public class SseEmitterScheduler {
         return ModelEvent.builder() //
                 .id(UUID.randomUUID().toString()) //
                 .event(Event.SSE_EVENT) //
-                .message("Message CronSchedulerTask, value: " + new Random().nextInt(Integer.MAX_VALUE) + ", " + generate()) //
+                .message("Message CronSchedulerTask, value: " + getRandom().nextInt(Integer.MAX_VALUE) + ", " + generate()) //
                 .scheduler(getClass().getSimpleName()) //
                 .build();
     }
 
     String generate() {
         final byte[] buffer = new byte[5];
-        new Random().nextBytes(buffer);
+        getRandom().nextBytes(buffer);
         return BaseEncoding.base64Url().omitPadding().encode(buffer); // or base32()
     }
+
+    Random getRandom() {
+        return new Random();
+    }
+
 }

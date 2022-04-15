@@ -6,6 +6,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableScheduling
-@ConditionalOnProperty(name = "scheduler.enabled")
+@ConditionalOnProperty(name = "scheduled.task.execute")
 public class SchedulerConfig {
 }
