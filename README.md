@@ -1,5 +1,11 @@
 # Schedule usage example
 
+#### Configuration:
+
+##### gradle:
+
+* '<b>updateProcfile</b>' task designed to update Procfile file that HEROKU service uses for deployment
+
 #### Spring boot:
 
 * [How to Start and Stop Scheduler in Spring Boot](https://www.yawintutor.com/how-to-start-and-stop-scheduler-in-spring-boot/)

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.malexj'
-version = '0.1.2'
+version = '0.1.3'
 sourceCompatibility = '18'
 
 repositories {
@@ -51,4 +51,11 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// Update Procfile for heroku deploy
+task updateProcfile() {
+    doLast {
+        new File(projectDir, "Procfile").text = """web: java -jar build/libs/$rootProject.name-$version""" + ".jar"
+    }
 }
