@@ -1,6 +1,9 @@
-# Schedule usage example
+## Application configuration:
 
-#### Configuration:
+### ENV Variables
+
+1. SCHEDULER_ENABLED - activate scheduling, by default - true
+2. ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost
 
 ##### gradle:
 
@@ -9,6 +12,8 @@
 ##### MongoDb:
 
 * Cloud db: https://cloud.mongodb.com/
+
+## Application info/documentation:
 
 #### Spring boot:
 
@@ -42,8 +47,3 @@
 #### Gradle
 
 * [Detecting build version and time at runtime](https://www.vojtechruzicka.com/spring-boot-version/)
-
-### ENV Variables
-
-1. SCHEDULER_ENABLED - activate scheduling, by default - true
-2. ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost

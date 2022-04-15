@@ -153,7 +153,8 @@ app.component('logs', {
                </tbody>
             </table>
          </div>
-         <div class="col-lg-12" style="padding-bottom: 40px;position: fixed;right: 0;left: 0;bottom: 0;">
+         <div class="col-lg-12" style="padding-bottom: 60px;position: fixed;right: 0;left: 0;bottom: 0;"></div>
+         <div class="col-lg-12">
             <nav aria-label="Page navigation example">
                <ul class="pagination justify-content-center">
                   <li class="page-item disabled">
