@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "00db9318-5412-4189-9336-bd1f8f5d9c64",
+		"name": "Scheduler_App_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Show all properties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_scheduler_app}}/actuator/env",
+					"host": [
+						"{{url_scheduler_app}}"
+					],
+					"path": [
+						"actuator",
+						"env"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST refresh properties",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url_scheduler_app}}/actuator/refresh",
+					"host": [
+						"{{url_scheduler_app}}"
+					],
+					"path": [
+						"actuator",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

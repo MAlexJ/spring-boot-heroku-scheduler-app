@@ -7,8 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 /**
- * MapStruct documentation:
- * https://mapstruct.org/documentation/stable/reference/html/
+ * MapStruct mapper:
  */
 @Mapper(componentModel = "spring")
 public interface ModelEventEntityMapper {

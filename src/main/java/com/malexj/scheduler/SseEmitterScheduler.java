@@ -1,9 +1,9 @@
-package com.malexj.tasks;
+package com.malexj.scheduler;
 
 import com.google.common.io.BaseEncoding;
 import com.malexj.event.Event;
 import com.malexj.event.ModelEvent;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Log
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SseEmitterScheduler {
 
     private final ApplicationEventPublisher publisher;
