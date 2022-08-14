@@ -1,6 +1,6 @@
 package com.malexj.model;
 
-import com.malexj.event.Event;
+import com.malexj.model.event.Event;
 import lombok.Builder;
 import lombok.Value;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;

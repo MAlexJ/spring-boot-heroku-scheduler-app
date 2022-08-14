@@ -1,8 +1,8 @@
 package com.malexj.scheduler;
 
 import com.google.common.io.BaseEncoding;
-import com.malexj.event.Event;
-import com.malexj.event.ModelEvent;
+import com.malexj.model.event.Event;
+import com.malexj.model.event.ModelEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.context.ApplicationEventPublisher;
@@ -21,7 +21,10 @@ public class SseEmitterScheduler {
 
     @Scheduled(cron = "${scheduled.task.job.cron}")
     public void executionScheduledTask() {
-        publisher.publishEvent(buildEvent());
+        // 1. does some work
+        ModelEvent modelEvent = buildEvent();
+        // 2. publishes the result
+        publisher.publishEvent(modelEvent);
     }
 
     private ModelEvent buildEvent() {

@@ -1,4 +1,4 @@
-package com.malexj.controller;
+package com.malexj.controller.rest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Log
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/rest/v1/info")
-public class AppInfoController {
+@RequestMapping("/rest/v1")
+public class AppInfoRestController {
 
     /**
      * Provide build-related information such as group and artifact:
@@ -24,7 +24,7 @@ public class AppInfoController {
      */
     private final BuildProperties buildProperties;
 
-    @GetMapping
+    @GetMapping("/info")
     public ResponseEntity<BuildProperties> appInfo() {
         return ResponseEntity.ok(buildProperties);
     }

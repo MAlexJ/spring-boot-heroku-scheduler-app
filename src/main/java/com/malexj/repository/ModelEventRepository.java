@@ -1,6 +1,6 @@
 package com.malexj.repository;
 
-import com.malexj.entity.ModelEventEntity;
+import com.malexj.model.entity.ModelEventEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;

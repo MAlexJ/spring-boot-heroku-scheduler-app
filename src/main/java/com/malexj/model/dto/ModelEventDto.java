@@ -1,6 +1,6 @@
-package com.malexj.dto;
+package com.malexj.model.dto;
 
-import com.malexj.event.Event;
+import com.malexj.model.event.Event;
 import lombok.Data;
 
 import java.time.LocalDateTime;

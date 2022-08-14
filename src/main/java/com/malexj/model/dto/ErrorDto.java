@@ -1,4 +1,4 @@
-package com.malexj.dto;
+package com.malexj.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

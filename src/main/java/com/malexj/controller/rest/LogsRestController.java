@@ -1,6 +1,6 @@
-package com.malexj.controller;
+package com.malexj.controller.rest;
 
-import com.malexj.dto.ModelEventDto;
+import com.malexj.model.dto.ModelEventDto;
 import com.malexj.service.EventLogsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Log
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/rest/v1/logs")
+@RequestMapping("/rest/v1")
 public class LogsRestController {
 
     private final EventLogsService service;
 
-    @GetMapping
+    @GetMapping("/logs")
     public ResponseEntity<Page<ModelEventDto>> findLogs(@PageableDefault(sort = {"created"}) Pageable pageable) {
         log.info("REST API: findLogs by : " + pageable);
         return ResponseEntity.ok(service.findAllLogsByPageable(pageable));

@@ -1,7 +1,7 @@
-package com.malexj.entity;
+package com.malexj.model.entity;
 
 
-import com.malexj.event.Event;
+import com.malexj.model.event.Event;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

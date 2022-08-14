@@ -1,4 +1,4 @@
-package com.malexj.event;
+package com.malexj.model.event;
 
 import java.util.Arrays;
 

@@ -1,8 +1,8 @@
-package com.malexj.controller;
+package com.malexj.controller.event;
 
 import com.google.common.collect.EvictingQueue;
-import com.malexj.event.Event;
-import com.malexj.event.ModelEvent;
+import com.malexj.model.event.Event;
+import com.malexj.model.event.ModelEvent;
 import com.malexj.exception.SseEmitterException;
 import com.malexj.model.SseEmitterWrapper;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,13 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static com.malexj.event.Event.HANDSHAKE_EVENT;
+import static com.malexj.model.event.Event.HANDSHAKE_EVENT;
 
 @Log
 @RestController
-@RequestMapping("/rest/v1/events")
+@RequestMapping("/rest/v1")
 @RequiredArgsConstructor
-public class EventController {
+public class ServerSentEventsController {
 
     // Emitter processor
     private ConcurrentMap<String, SseEmitterWrapper> emitterMap;
@@ -72,7 +72,7 @@ public class EventController {
                 });
     }
 
-    @GetMapping("/subscribe/{eventId}/{event}")
+    @GetMapping("/events/subscribe/{eventId}/{event}")
     public SseEmitter subscribeToEmitterByIdAndEvent(@PathVariable String eventId, @PathVariable String event) {
         SseEmitterWrapper emitterWrapper = buildWrapper(eventId, event);
         return Optional.ofNullable(emitterMap.putIfAbsent(eventId, emitterWrapper)) //

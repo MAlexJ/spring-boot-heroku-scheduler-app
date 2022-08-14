@@ -1,8 +1,8 @@
 package com.malexj.mapper;
 
-import com.malexj.dto.ModelEventDto;
-import com.malexj.entity.ModelEventEntity;
-import com.malexj.event.ModelEvent;
+import com.malexj.model.dto.ModelEventDto;
+import com.malexj.model.entity.ModelEventEntity;
+import com.malexj.model.event.ModelEvent;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

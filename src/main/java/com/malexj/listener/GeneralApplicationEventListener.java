@@ -1,7 +1,7 @@
 package com.malexj.listener;
 
-import com.malexj.entity.ModelEventEntity;
-import com.malexj.event.ModelEvent;
+import com.malexj.model.entity.ModelEventEntity;
+import com.malexj.model.event.ModelEvent;
 import com.malexj.mapper.ModelEventEntityMapper;
 import com.malexj.repository.ModelEventRepository;
 import lombok.RequiredArgsConstructor;
