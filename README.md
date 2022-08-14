@@ -85,6 +85,10 @@
 
 ## Application info/documentation:
 
+#### Github Java CI with Gradle
+
+* Issue Error Gradle Script ‘/Home/Runner/Work/*/Gradlew’ Is Not Executable  [Error Gradle Script Gradlew Is Not Executable](https://spacetech.dk/error-gradle-script-home-runner-work-gradlew-is-not-executable.html)
+
 #### Spring boot:
 
 * [How to Start and Stop Scheduler in Spring Boot](https://www.yawintutor.com/how-to-start-and-stop-scheduler-in-spring-boot/)
