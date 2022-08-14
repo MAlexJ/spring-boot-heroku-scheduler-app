@@ -74,6 +74,15 @@
 
 * postman collection for test API: /info/Scheduler_App_API.postman_collection.json
 
+### Swagger UI
+
+* documentation: https://springdoc.org/ <br>
+* how to use: The Swagger UI page will then be available at:
+  <br>
+  <code> http://server:{{port}}/context-path/swagger-ui.html </code>
+  <br> or <br>
+  <code> http://server:{{port}}/swagger-ui.html </code>
+
 ## Application info/documentation:
 
 #### Spring boot:
