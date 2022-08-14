@@ -1,8 +1,20 @@
+## Project description:
+
+Project based on 'server-sent-events' technology, which will allow real-time tracking of event changes
+and displaying them in web UI (angularJS) <br>
+
+* Database - Mongo DB
+* Web framework - Spring
+* Java - 18
+* UI - angularJS
+
+as an additional option, the project can be part of the spring cloud
+
 ## Application configuration:
 
 ### ENV Variables
 
-#### Required ENV Variables
+#### Required ENV Variables ( file: application.yaml)
 
 1. MONGODB_DATABASE - MongoDb database name
 2. MONGODB_URI - URI to MongoDb
@@ -12,6 +24,8 @@
 3. PORT - PORT - spring application port, by default - 8081
 4. SCHEDULER_CRONE - job time to execute for standalone running (override by CONFIG_SERVER_URI)
 5. ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost
+    * configuration and Zipkin service is located at the link: https://github.com/MAlexJ/spring-boot-heroku-zipkin-app
+
 6. CONFIG_SERVER_URI - URL to configuration properties to spring configuration server
 
 ### Gradle:
@@ -87,7 +101,8 @@
 
 #### Github Java CI with Gradle
 
-* Issue Error Gradle Script ‘/Home/Runner/Work/*/Gradlew’ Is Not Executable  [Error Gradle Script Gradlew Is Not Executable](https://spacetech.dk/error-gradle-script-home-runner-work-gradlew-is-not-executable.html)
+* Issue Error Gradle Script ‘/Home/Runner/Work/*/Gradlew’ Is Not
+  Executable  [Error Gradle Script Gradlew Is Not Executable](https://spacetech.dk/error-gradle-script-home-runner-work-gradlew-is-not-executable.html)
 
 #### Spring boot:
 
