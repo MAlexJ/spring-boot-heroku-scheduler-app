@@ -65,7 +65,7 @@ public class ServerSentEventsController {
                     try {
                         emitter.send(buildEmitterEvent(event));
                     } catch (IOException e) {
-                        log.warning("<<<<< Connection closed: " + id + ", message: " + e.getMessage());
+                        log.info("<<<<< Connection closed: " + id + ", message: " + e.getMessage());
                         if (e.getMessage() != null && e.getMessage().contains("An established connection")) {
                             return;
                         }
