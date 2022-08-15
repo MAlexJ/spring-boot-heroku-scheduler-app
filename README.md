@@ -23,10 +23,26 @@ as an additional option, the project can be part of the spring cloud
 
 3. PORT - PORT - spring application port, by default - 8081
 4. SCHEDULER_CRONE - job time to execute for standalone running (override by CONFIG_SERVER_URI)
-5. ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost
+5. ZIPKIN_ENABLED - enable tracing, by default - disable
+    * ZIPKIN_PORT - URL to Zipkin distributed tracing system, by default - http://localhost
     * configuration and Zipkin service is located at the link: https://github.com/MAlexJ/spring-boot-heroku-zipkin-app
+6. CONFIG_SERVER_ENABLED - enable spring global configuration, disabled by default
+    * CONFIG_SERVER_URI - URL to configuration properties to spring configuration server
+7. SPRING_ACTUATOR_ENABLED - enable spring actuator, disabled by default
+    * use url - http://application:port/actuator/ for info
+    *
 
-6. CONFIG_SERVER_URI - URL to configuration properties to spring configuration server
+### How to add ENV variable to IDE
+
+1. Got to IDE >> Edit configuration
+2. Modify options >> select in list - Environment variables
+3. set ENV variables as in the example below
+
+example:
+<code>
+MONGODB_DATABASE=sampleDB;MONGODB_URI=mongodb+srv://admin:
+pWCbN0STJVmDmdDs@cluster0.ckcsd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+</code>
 
 ### Gradle:
 
@@ -108,6 +124,28 @@ as an additional option, the project can be part of the spring cloud
 
 * [How to Start and Stop Scheduler in Spring Boot](https://www.yawintutor.com/how-to-start-and-stop-scheduler-in-spring-boot/)
 * [Running Scheduled Jobs in Spring Boot](https://reflectoring.io/spring-scheduler/)
+
+### Spring Actuator
+
+* [Spring Boot Actuator: Health check, Auditing, Metrics gathering and Monitoring](https://www.callicoder.com/spring-boot-actuator/#:~:text=You%20can%20enable%20or%20disable,the%20identifier%20for%20the%20endpoint)
+
+Endpoint ID Description
+
+* auditevents - Exposes audit events (e.g. auth_success, order_failed) for your application
+* info - Displays information about your application.
+* health - Displays your application’s health status.
+* metrics - Shows various metrics information of your application.
+* loggers - Displays and modifies the configured loggers.
+* logfile - Returns the contents of the log file (if logging.file or logging.path properties are set.)
+* httptrace - Displays HTTP trace info for the last 100 HTTP request/response.
+* env - Displays current environment properties.
+* flyway - Shows details of Flyway database migrations.
+* liquidbase - Shows details of Liquibase database migrations.
+* shutdown - Lets you shut down the application gracefully.
+* mappings - Displays a list of all @RequestMapping paths.
+* scheduledtasks - Displays the scheduled tasks in your application.
+* threaddump - Performs a thread dump.
+* heapdump - Returns a GZip compressed JVM heap dump.
 
 #### Spring Zipkin:
 

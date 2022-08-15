@@ -8,6 +8,7 @@ spring:
     name: heroku-scheduler-app
   zipkin:
     baseUrl: ${ZIPKIN_PORT:http://127.0.0.1:9411}
+    enabled: ${ZIPKIN_ENABLED:false}
   data:
     mongodb:
       database: ${MONGODB_DATABASE}
@@ -23,3 +24,4 @@ management:
     web:
       exposure:
         include: '*'
+    enabled-by-default: ${SPRING_ACTUATOR_ENABLED:false}

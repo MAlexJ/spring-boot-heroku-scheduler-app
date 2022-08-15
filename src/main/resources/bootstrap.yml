@@ -4,3 +4,4 @@ spring:
   cloud:
     config:
       uri: ${CONFIG_SERVER_URI:http://127.0.0.1:8888}
+      enabled: ${CONFIG_SERVER_ENABLED:false}

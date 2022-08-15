@@ -1,10 +1,10 @@
 package com.malexj.controller.event;
 
 import com.google.common.collect.EvictingQueue;
-import com.malexj.model.event.Event;
-import com.malexj.model.event.ModelEvent;
 import com.malexj.exception.SseEmitterException;
 import com.malexj.model.SseEmitterWrapper;
+import com.malexj.model.event.Event;
+import com.malexj.model.event.ModelEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.context.event.EventListener;
@@ -106,6 +106,8 @@ public class ServerSentEventsController {
         String eventType = event.getEvent().getEmitterEventName();
         return SseEmitter.event() //
                 .id(id) //
+                // ote: we can use JSON as data type: MediaType.APPLICATION_JSON
+                // using method - data(Object object, @Nullable MediaType mediaType)
                 .data(message) //
                 .name(eventType) //
                 .comment("Comment from " + scheduler + " emitter") //
