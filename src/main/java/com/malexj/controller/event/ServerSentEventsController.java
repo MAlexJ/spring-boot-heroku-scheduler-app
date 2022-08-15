@@ -7,6 +7,7 @@ import com.malexj.model.event.Event;
 import com.malexj.model.event.ModelEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,12 +37,13 @@ public class ServerSentEventsController {
     private Queue<ModelEvent> evictingSseEventQueue;
 
     // Max number of stored evens in buffer
-    private static final int MAX_SIZE = 7; //todo >>> move to property file
+    @Value("${sse.evicting-queue.max-size}")
+    private int queueMaxSize;
 
     @PostConstruct
     public void init() {
         emitterMap = new ConcurrentHashMap<>();
-        evictingSseEventQueue = EvictingQueue.create(MAX_SIZE);
+        evictingSseEventQueue = EvictingQueue.create(queueMaxSize);
     }
 
     @Async

@@ -1,5 +1,10 @@
 server:
   port: ${PORT:8081}
+
+sse:
+  evicting-queue:
+    max-size: ${MAX_QUEUE_SIZE:7}
+
 spring:
   jackson:
     serialization:

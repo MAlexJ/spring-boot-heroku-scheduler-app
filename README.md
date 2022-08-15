@@ -30,7 +30,7 @@ as an additional option, the project can be part of the spring cloud
     * CONFIG_SERVER_URI - URL to configuration properties to spring configuration server
 7. SPRING_ACTUATOR_ENABLED - enable spring actuator, disabled by default
     * use url - http://application:port/actuator/ for info
-    *
+8. MAX_QUEUE_SIZE - cache size for SSE, 7 by default
 
 ### How to add ENV variable to IDE
 
