@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -133,7 +134,7 @@ public class ServerSentEventsController {
         List<ModelEvent> modelEvents = new ArrayList<>(evictingSseEventQueue);
         return SseEmitter.event() //
                 .id(id) //
-                .data(modelEvents) //
+                .data(modelEvents, MediaType.APPLICATION_JSON) //
                 .name(HANDSHAKE_EVENT.getEmitterEventName()) //
                 .comment("Comment from empty emitter") //
                 .reconnectTime(Long.MIN_VALUE);

@@ -57,6 +57,7 @@ app.component('monitor', {
         eventSource.addEventListener(event_type, event => {
             console.log("id: " + event.lastEventId + `${event_type} type` + "data: " + event.data)
             $scope.$apply(function () {
+                // todo >>> hardcode, move it to property ar global variable !!!!
                 if ($scope.taskArray.length === 7) {
                     $scope.taskArray.shift();
                 }
