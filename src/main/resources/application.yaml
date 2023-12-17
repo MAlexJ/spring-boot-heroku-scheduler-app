@@ -16,8 +16,8 @@ spring:
 #    enabled: ${ZIPKIN_ENABLED:false}
   data:
     mongodb:
-      database: ${MONGODB_DATABASE:sampleDB}
-      uri: ${MONGODB_URI:mongodb+srv://malex:GOSYRY5poSWyr0Df@cluster0.8seexos.mongodb.net/?retryWrites=true&w=majority}
+      database: ${MONGODB_DATABASE:name_database}
+      uri: ${MONGODB_URI:'USER_NAME':'PASSWORD'@'URL_TO_DATABASE'}}
 
 scheduled:
   task:
