@@ -5,6 +5,7 @@ import com.malexj.exception.SseEmitterException;
 import com.malexj.model.SseEmitterWrapper;
 import com.malexj.model.event.Event;
 import com.malexj.model.event.ModelEvent;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -70,7 +70,7 @@ public class ServerSentEventsController {
                         if (e.getMessage() != null && e.getMessage().contains("An established connection")) {
                             return;
                         }
-                        throw new SseEmitterException(e.getMessage());
+                        log.warning(e.getMessage());
                     }
                 });
     }
